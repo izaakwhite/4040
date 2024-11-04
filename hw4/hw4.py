@@ -129,23 +129,6 @@ for amount in amounts:
     start_time = time.time()
     ways = coinChange(amount, coins_us)
     end_time = time.time()
-    def coinChangePlus(amount, coins):
-        ways = [0] * (amount + 1)
-        combinations = [[] for _ in range(amount + 1)]
-        ways[0] = 1
-        combinations[0] = [[]]
-        
-        for coin in coins:
-            for i in range(coin, amount + 1):
-                if ways[i - coin] > 0:
-                    ways[i] += ways[i - coin]
-                    for prev_comb in combinations[i - coin]:
-                        new_comb = prev_comb + [coin]
-                        new_comb.sort()  # Sort to ensure unique combinations
-                        if new_comb not in combinations[i]:
-                            combinations[i].append(new_comb)
-        
-        return ways[amount], combinations[amount]
     times_us.append(end_time - start_time)
     print(f"Amount: {amount}, Ways: {ways}, Time: {end_time - start_time:.6f} seconds")
 
