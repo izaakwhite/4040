@@ -52,6 +52,7 @@ def cutRodPlus(price_dict, n):
 
 # %%
 import matplotlib.pyplot as plt
+import time
 
 lengths = [4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096]
 values = []
@@ -100,22 +101,22 @@ def coinChange(amount, coins):
 # %%
 
 def coinChangePlus(amount, coins):
-    ways = [0] * (amount + 1)
-    combinations = [[] for _ in range(amount + 1)]
-    ways[0] = 1
-    combinations[0] = [[]]
+    ways = [0] * (amount + 1)  # Initialize list to store number of ways to make each amount
+    combinations = [[] for _ in range(amount + 1)]  # Initialize list to store combinations for each amount
+    ways[0] = 1  # Base case: one way to make amount 0
+    combinations[0] = [[]]  # Base case: one combination (empty list) for amount 0
         
     for coin in coins:
         for i in range(coin, amount + 1):
             if ways[i - coin] > 0:
-                ways[i] += ways[i - coin]
+                ways[i] += ways[i - coin]  # Update number of ways by adding ways to make (i - coin)
                 for prev_comb in combinations[i - coin]:
-                    new_comb = prev_comb + [coin]
+                    new_comb = prev_comb + [coin]  # Create new combination by adding current coin
                     new_comb.sort()  # Sort to ensure unique combinations
                     if new_comb not in combinations[i]:
-                        combinations[i].append(new_comb)
+                        combinations[i].append(new_comb)  # Add new combination if not already present
         
-    return ways[amount], combinations[amount]
+    return ways[amount], combinations[amount]  # Return number of ways and the combinations
 # %%
 import time
 import matplotlib.pyplot as plt
@@ -162,7 +163,7 @@ plt.grid(True)
 plt.show()
 # %% 2. c - Coin Change Problem with Combinations
 import matplotlib.pyplot as plt
-
+import time
 # Test amounts for both US and Wizard currency
 test_amounts = [10, 25, 50, 100]
 coins_us = [1, 5, 10, 25, 50, 100, 200, 500, 1000, 2000]
@@ -204,3 +205,4 @@ plt.ylabel('Time (seconds)')
 plt.legend()
 plt.grid(True)
 plt.show()
+# %%
